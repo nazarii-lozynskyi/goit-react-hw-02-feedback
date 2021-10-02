@@ -3,6 +3,9 @@ import React from 'react';
 import styles from './Statistics.module.css';
 
 function Statistics({ good, neutral, bad, total, positivePercentage }) {
+  total = good + neutral + bad;
+  positivePercentage = Math.round((good / (good + bad + neutral)) * 100);
+
   return (
     <>
       <p className={styles.title}>Statistics</p>
@@ -29,16 +32,14 @@ function Statistics({ good, neutral, bad, total, positivePercentage }) {
 
         <li className={styles.item}>
           <p className={styles.heading}>
-            Total:<span className={styles.data}>{good + bad + neutral}</span>
+            Total:<span className={styles.data}>{total}</span>
           </p>
         </li>
 
         <li className={styles.item}>
           <p className={styles.heading}>
             Positive feedback:
-            <span className={styles.data}>
-              {(good / (good + bad + neutral)) * 100} %
-            </span>
+            <span className={styles.data}>{positivePercentage} %</span>
           </p>
         </li>
       </ul>
