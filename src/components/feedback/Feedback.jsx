@@ -1,9 +1,9 @@
 import React from 'react';
 
-import FeedbackOptions from './feedbackOptions/FeedbackOptions';
-import Notification from './notification/Notification';
-import Section from './section/Section';
-import Statistics from './statistics/Statistics';
+import FeedbackOptions from './feedbackOptions';
+import Notification from './notification';
+import Section from './section';
+import Statistics from './statistics';
 
 import styles from './section/Section.module.css';
 class Feedback extends React.Component {
@@ -44,11 +44,6 @@ class Feedback extends React.Component {
     });
   };
 
-  countTotalFeedback() {
-    console.log(this.state.neutral + this.state.bad + this.state.good);
-    return this.state.neutral + this.state.bad + this.state.good;
-  }
-
   countPositiveFeedbackPercentage() {
     return (
       (this.state.good /
@@ -58,6 +53,7 @@ class Feedback extends React.Component {
   }
 
   render() {
+    const { good, neutral, bad } = this.state;
     return (
       <Section className={styles.container} title="Please leave feedback">
         <FeedbackOptions
@@ -65,11 +61,11 @@ class Feedback extends React.Component {
           onLeaveNeutralFeedback={this.leaveNeutralFeedback}
           onLeaveNegativeFeedback={this.leaveNegativeFeedback}
         />
-        {this.state.neutral + this.state.bad + this.state.good ? (
+        {neutral + bad + good ? (
           <Statistics
-            good={this.state.good}
-            neutral={this.state.neutral}
-            bad={this.state.bad}
+            good={good}
+            neutral={neutral}
+            bad={bad}
             total={this.countTotalFeedback}
             positivePercentage={this.countPositiveFeedbackPercentage}
           />
