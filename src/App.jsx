@@ -1,11 +1,14 @@
 import Container from './components/container/Container';
-
+//import Section from './components/feedback/section/Section';
 import Feedback from './components/feedback/Feedback';
+//import FeedbackOptions from './components/feedback/feedbackOptions/FeedbackOptions';
+//import Statistics from './components/feedback/statistics/Statistics';
+//import Notification from './components/feedback/notification/Notification';
 
 function App() {
   return (
     <Container>
-      <Feedback initialValue={0} />
+      <Feedback />
     </Container>
   );
 }
