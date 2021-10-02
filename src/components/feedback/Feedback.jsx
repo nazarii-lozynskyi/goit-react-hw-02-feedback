@@ -1,15 +1,15 @@
 import React from 'react';
 
-import Section from './section/Section';
 import FeedbackOptions from './feedbackOptions/FeedbackOptions';
 import Notification from './notification/Notification';
+import Section from './section/Section';
 import Statistics from './statistics/Statistics';
 
-import styles from '../feedback/Feedback.module.css';
-
+import styles from './section/Section.module.css';
 class Feedback extends React.Component {
   static defaultProps = {
     initialValue: 0,
+    children: [],
   };
 
   static propTypes = {};
@@ -50,10 +50,10 @@ class Feedback extends React.Component {
   }
 
   countPositiveFeedbackPercentage() {
-    return Math.round(
+    return (
       (this.state.good /
         (this.state.good + this.state.neutral + this.state.bad)) *
-        100
+      100
     );
   }
 
@@ -65,7 +65,6 @@ class Feedback extends React.Component {
           onLeaveNeutralFeedback={this.leaveNeutralFeedback}
           onLeaveNegativeFeedback={this.leaveNegativeFeedback}
         />
-
         {this.state.neutral + this.state.bad + this.state.good ? (
           <Statistics
             good={this.state.good}
