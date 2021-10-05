@@ -20,29 +20,37 @@ class Feedback extends React.Component {
     bad: 0,
   };
 
-  leavePositiveFeedback = () => {
-    this.setState(prevState => {
-      return {
-        good: prevState.good + 1,
-      };
-    });
-  };
+  onLeaveFeedback = event => {
+    const label = event.target.textContent;
 
-  leaveNeutralFeedback = () => {
-    this.setState(prevState => {
-      return {
-        neutral: prevState.neutral + 1,
-      };
-    });
+    this.setState(prevState => ({ [label]: (prevState[label] += 1) }));
   };
+  // leavePositiveFeedback = () => {
+  //   this.setState(prevState => {
+  //     return {
+  //       good: prevState.good + 1,
+  //     };
+  //   });
+  // };
 
-  leaveNegativeFeedback = () => {
-    this.setState(prevState => {
-      return {
-        bad: prevState.bad + 1,
-      };
-    });
-  };
+  // leaveNeutralFeedback = () => {
+  //   this.setState(prevState => {
+  //     return {
+  //       neutral: prevState.neutral + 1,
+  //     };
+  //   });
+  // };
+
+  // leaveNegativeFeedback = () => {
+  //   this.setState(prevState => {
+  //     return {
+  //       bad: prevState.bad + 1,
+  //     };
+  //   });
+  // };
+  countTotalFeedback() {
+    return this.state.good + this.state.bad + this.setState.neutral;
+  }
 
   countPositiveFeedbackPercentage() {
     return (
@@ -57,11 +65,13 @@ class Feedback extends React.Component {
     return (
       <Section className={styles.container} title="Please leave feedback">
         <FeedbackOptions
-          onLeavePositiveFeedback={this.leavePositiveFeedback}
-          onLeaveNeutralFeedback={this.leaveNeutralFeedback}
-          onLeaveNegativeFeedback={this.leaveNegativeFeedback}
+          onLeaveFeedback={this.onLeaveFeedback}
+          options={this.state}
+          // onLeavePositiveFeedback={this.leavePositiveFeedback}
+          // onLeaveNeutralFeedback={this.leaveNeutralFeedback}
+          // onLeaveNegativeFeedback={this.leaveNegativeFeedback}
         />
-        {neutral + bad + good ? (
+        {good + bad + neutral ? (
           <Statistics
             good={good}
             neutral={neutral}
